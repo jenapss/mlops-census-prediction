@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      DVC_REMOTE_REPOSITORY: s3://jelalbucket
 
     steps:
     - uses: actions/checkout@v2

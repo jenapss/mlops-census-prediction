@@ -33,9 +33,9 @@ async def get():
 @app.post('/predict')
 async def inference(data: Census):
 
-    model = load('model/model.joblib'))
-    encoder = load('model/encoder.joblib'))
-    lb = load('model/lb.joblib'))
+    model = load('model/model.joblib')
+    encoder = load('model/encoder.joblib')
+    lb = load('model/lb.joblib')
 
     data = data.dict(by_alias=True)
     data_frame = DataFrame(data, index=[0])

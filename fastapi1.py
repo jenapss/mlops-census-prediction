@@ -25,12 +25,6 @@ class Census(BaseModel):
 
 app = FastAPI()
 
-'''if "DYNO" in os.environ and os.path.isdir(".dvc"):
-    os.system("dvc config core.no_scm true")
-    if os.system("dvc pull") != 0:
-        exit("dvc pull failed")
-    os.system("rm -r .dvc .apt/usr/lib/dvc")'''
-
 @app.get('/')
 async def get():
     return {'message': 'Hello'}
@@ -39,9 +33,10 @@ async def get():
 @app.post('/predict')
 async def inference(data: Census):
 
-    model = load('model/model_test.joblib')
-    encoder = load('model/encoder_test.joblib')
-    lb = load('model/lb_test.joblib')
+    model = load(os.path.join(os.getcwd(), 'model/model_test.joblib'))
+    print('1')
+    encoder = load(os.path.join(os.getcwd(), 'model/encoder_test.joblib'))
+    lb = load(os.path.join(os.getcwd(), 'model/lb_test.joblib'))
 
     data = data.dict(by_alias=True)
     data_frame = DataFrame(data, index=[0])

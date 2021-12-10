@@ -1,5 +1,7 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import pandas as pd
+import os
 
 
 def process_data(
@@ -43,7 +45,7 @@ def process_data(
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
         passed in.
     """
-
+    print('++++++++++++++++++++++++', categorical_features)
     if label is not None:
         y = X[label]
         X = X.drop([label], axis=1)
@@ -51,6 +53,7 @@ def process_data(
         y = np.array([])
 
     X_categorical = X[categorical_features].values
+    print('------', X_categorical)
     X_continuous = X.drop(*[categorical_features], axis=1)
 
     if training is True:

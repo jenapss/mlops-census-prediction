@@ -8,9 +8,9 @@ import argparse
 from pydantic import BaseModel, Field
 import pandas as pd
 import sys
-from fastapi import FastAPI
+
 import logging
-from starter import train_model
+from starter import train_model, slice_score
 
 
 def go(args):
@@ -19,13 +19,17 @@ def go(args):
         logging.info("Train/Test model procedure started")
         train_model.train_model()
 
+    if args.choice == "slice_score":
+        logging.info("Slice Score procedure started")
+        slice_score.slice_metrics()
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="ML training pipeline")
     parser.add_argument(
         "--choice",
         type=str,
-        choices=["train_model"],
+        choices=["train_model", 'slice_score'],
         default="all",
         help="Pipeline action"
     )

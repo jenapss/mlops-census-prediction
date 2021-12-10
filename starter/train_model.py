@@ -21,15 +21,18 @@ def train_model():
     """
     Train the model on training data.
     """
+
     train_data = pd.read_csv('data/clean_census_tr.csv')
     train, test = train_test_split(train_data, test_size=0.2)
     
     categories = list(train.select_dtypes(include='object').columns)[:-1]
     X_train, y_train, encoder, lb = process_data(train, categories, label='salary', training=True)
 
+    #train model
     model = ml_model.train_model(X_train, y_train)
 
 
-    dump(model, 'model/model.joblib')
-    dump(encoder, 'model/encoder.joblib')
-    dump(lb, 'model/lb.joblib')
+    
+    ml_model.save_model(model, 'model')
+    ml_model.save_model(encoder, 'encoder')
+    ml_model.save_model(lb, 'lb')

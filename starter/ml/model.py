@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import logging
 from .data import process_data
 
+
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -73,4 +74,7 @@ def inference(model, X):
     model_pred = model.predict(X)
     return model_pred
 
+
+def save_model(model, model_name):
+    dump(model, 'model/{}.joblib'.format(model_name))
 

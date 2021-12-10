@@ -13,7 +13,7 @@ import logging
 from starter import train_model, slice_score
 
 
-def go(args):
+def main_function(args):
     logging.basicConfig(level=logging.INFO)
     if args.choice == "train_model":
         logging.info("Train/Test model procedure started")
@@ -36,6 +36,6 @@ if __name__ == '__main__':
 
     main_args = parser.parse_args()
 
-    go(main_args)
+    main_function(main_args)
 
 

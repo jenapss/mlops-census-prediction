@@ -1,12 +1,8 @@
 import pandas as pd
 from joblib import load
-import ml.model
 import logging
-
-
-
-
-
+from ml.data import process_data
+from ml.model import compute_model_metrics
 
 def slice_metrics():
     """
@@ -19,15 +15,13 @@ def slice_metrics():
     lb = load('model/lb.joblib')
 
     slice_predictions = list()
-
+    predictions = dict()
     categories = list(test_data.select_dtypes(include='object').columns)[:-1]
-
-
 
     for cat_feature  in categories:
         for cls in test_data[cat_feature].unique():
             filtered_df = test_data[test_data[cat_feature] == cls]
-            X_test, y_test, _, _ = process_data(filtered_df, label='salary', training=False, encoder=encoder, lb=binarizer)
+            X_test, y_test, _, _ = process_data(filtered_df, label='salary', training=False, encoder=encoder, lb=lb)
             y_preds = trained_model.predict(X_test)
             precision, recall, fbeta = compute_model_metrics(y_test, y_preds)
             predictions[cat_feature] = {

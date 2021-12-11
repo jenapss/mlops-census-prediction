@@ -9,8 +9,6 @@ import json
 import pytest
 
 client = TestClient(app)
-CSV_PATH = os.path.join(os.path.dirname(__file__), 'data_csv.csv')
-JSON_PATH = os.path.join(os.path.dirname(__file__), 'data_json.json')
 
 
 
@@ -52,7 +50,6 @@ def test_post():
 
 }
 
-    
     response = requests.post(
         'https://jelal-fastapi.herokuapp.com/predict', json=data_json)
     assert response.status_code == 200

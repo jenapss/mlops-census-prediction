@@ -7,3 +7,5 @@ fastapi==0.63.0
 uvicorn
 gunicorn
 PyYAML==5.4.1
+ruamel.yaml==0.17.17
+ruamel.yaml.clib==0.2.6

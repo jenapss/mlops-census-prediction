@@ -12,7 +12,7 @@ import os
 class Census(BaseModel):
     workclass: str = Field(..., example = "Never-married")
     education: str = Field(..., example= 'Bachelors')
-    marital_status: str = Field(..., alias = 'marital-status')
+    marital_status: str = Field(..., alias = 'marital-status', example='Divorced')
     occupation: str = Field(..., example = 'Adm-clerical')
     relationship: str = Field(..., example = 'husband')
     race: str = Field(..., example = 'White')
@@ -22,6 +22,13 @@ class Census(BaseModel):
     age: int = Field(..., example = 35)
     hours_per_week: int = Field(..., alias = 'hours-per-week',
                                      example = 45)
+
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+
 
 app = FastAPI()
 
@@ -33,10 +40,10 @@ async def get():
 @app.post('/predict')
 async def inference(data: Census):
 
-    model = load(os.path.join(os.getcwd(), 'model/model_test.joblib'))
+    model = load(os.path.join(os.getcwd(), 'model/model.joblib'))
     print('1')
-    encoder = load(os.path.join(os.getcwd(), 'model/encoder_test.joblib'))
-    lb = load(os.path.join(os.getcwd(), 'model/lb_test.joblib'))
+    encoder = load(os.path.join(os.getcwd(), 'model/encoder.joblib'))
+    lb = load(os.path.join(os.getcwd(), 'model/lb.joblib'))
 
     data = data.dict(by_alias=True)
     data_frame = DataFrame(data, index=[0])

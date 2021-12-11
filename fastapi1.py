@@ -60,11 +60,8 @@ async def inference(data: Census):
                ]
     categorical_cols = columns[: -2]
 
-    X, _, _, _ = data_package.process_data(
-        data_frame,
-        categorical_cols,
-        encoder=encoder, lb=lb, training=False)
+    X, _, _, _ = data_package.process_data( data_frame, categorical_cols, encoder=encoder, lb=lb, training=False)
     pred = model_package.inference(model, X)
     y = lb.inverse_transform(pred)[0]
-    print('prediction---->',y)
-    return {"prediction": y}
+    print('PREDICTION---->',y)
+    return {"PREDICTION": y}

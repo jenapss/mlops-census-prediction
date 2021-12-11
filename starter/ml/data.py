@@ -76,4 +76,4 @@ def process_data(
 
 def load_data(string):
     data = pd.read_csv(string)
-    return train_test_split(train_data, test_size=0.2)
+    return train_test_split(data, test_size=0.2)

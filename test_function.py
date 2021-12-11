@@ -14,8 +14,8 @@ client = TestClient(app)
 
 def test_inference():
     data_json = {
-    "workclass": "Private",
-    "education": "Prof-school",
+    "workclass": "State-gov",
+    "education": "Bachelors",
     "marital-status": "Married-civ-spouse",
     "occupation": "Exec-managerial",
     "relationship": "Unmarried",

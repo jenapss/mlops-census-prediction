@@ -1,8 +1,9 @@
 # Model Card
-
 For additional information see the Model Card paper: https://arxiv.org/pdf/1810.03993.pdf
 
 ## Model Details
+The project uses pre-trained Randomforest classifier model trained on open-source Census Dataset provided by Udacity.
+
 
 ## Intended Use
 Identify features that affect person's income level
@@ -17,6 +18,9 @@ Data is splitted into two subgroups such as ```train``` and ```test``` with ```t
 ## Metrics
 Metrics that are mostly monitores are:
 Presicion, Recall, and F1 score
+
+F1 score - 0.71
+
 
 ## Ethical Considerations
 Contains personal/private informations.

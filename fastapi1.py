@@ -10,7 +10,7 @@ from starter.ml import data as data_package
 import os
 
 class Census(BaseModel):
-    workclass: str = Field(..., example = "Never-married")
+    workclass: str = Field(..., example = 'Never-married')
     education: str = Field(..., example= 'Bachelors')
     marital_status: str = Field(..., alias = 'marital-status', example='Divorced')
     occupation: str = Field(..., example = 'Adm-clerical')

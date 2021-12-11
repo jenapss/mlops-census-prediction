@@ -63,7 +63,7 @@ def test_post():
 def test_get_api():
     response = client.get('https://jelal-fastapi.herokuapp.com')
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello"}
+    assert response.json() == 'YAHOO CENSUS PREDICTION APP IS WORKING!'
 
 
 

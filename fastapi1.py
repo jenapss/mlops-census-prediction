@@ -6,22 +6,9 @@ from pydantic import BaseModel, Field
 from starter import train_model, slice_score
 from starter.ml import model as model_package
 from starter.ml import data as data_package
-
+import ruamel.yaml
 import os
-
-class Census(BaseModel):
-    workclass: str = Field(..., example = 'Never-married')
-    education: str = Field(..., example= 'Bachelors')
-    marital_status: str = Field(..., alias = 'marital-status', example='Divorced')
-    occupation: str = Field(..., example = 'Adm-clerical')
-    relationship: str = Field(..., example = 'husband')
-    race: str = Field(..., example = 'White')
-    sex: str = Field(..., example = 'Male')
-    native_country: str = Field(..., alias = 'native-country', 
-                                    example = 'Adm-clerical')
-    age: int = Field(..., example = 35)
-    hours_per_week: int = Field(..., alias = 'hours-per-week',
-                                     example = 45)
+from census_class import Census
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
@@ -34,7 +21,7 @@ app = FastAPI()
 
 @app.get('/')
 async def get():
-    return {'message': 'Hello'}
+    return 'YAHOO CENSUS PREDICTION APP IS WORKING!'
 
 
 @app.post('/predict')
@@ -47,17 +34,12 @@ async def inference(data: Census):
 
     data = data.dict(by_alias=True)
     data_frame = DataFrame(data, index=[0])
-    columns = ["workclass",
-               "education",
-               "marital-status",
-               "occupation",
-               "relationship",
-               "race",
-               "sex",
-               "native-country",
-               "age",
-               "hours-per-week",
-               ]
+
+    
+    #load categories
+    with open('config.yaml') as fp:
+        data = ruamel.yaml.load(fp)
+    columns = data['categorical_features']
     categorical_cols = columns[: -2]
 
     X, _, _, _ = data_package.process_data( data_frame, categorical_cols, encoder=encoder, lb=lb, training=False)

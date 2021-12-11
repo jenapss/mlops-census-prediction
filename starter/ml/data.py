@@ -71,3 +71,9 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+
+
+
+def load_data(string):
+    data = pd.read_csv(string)
+    return train_test_split(train_data, test_size=0.2)

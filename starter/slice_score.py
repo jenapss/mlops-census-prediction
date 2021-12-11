@@ -20,13 +20,11 @@ def slice_metrics():
     categories = list(test_data.select_dtypes(include='object').columns)[:-1]
 
     for cat_feature  in categories:
-        for cls in test_data[cat_feature].unique():
-            filtered_df = test_data[test_data[cat_feature] == cls]
+        for x in test_data[cat_feature].unique():
+            filtered_df = test_data[test_data[cat_feature] == x]
             X_test, y_test, _, _ = process_data(filtered_df, categories, label='salary', training=False, encoder=encoder, lb=lb)
             y_preds = trained_model.predict(X_test)
             precision, recall, fbeta = compute_model_metrics(y_test, y_preds)
-            
-            #scores = 'PRECISION {:2.2f}, RECALL {:2.2f}, F1 {:2.2f}'.format(precision, recall, fbeta)
 
             scores[cat_feature] = {
                 'precision': precision,

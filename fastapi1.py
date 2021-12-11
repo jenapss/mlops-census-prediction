@@ -59,4 +59,5 @@ async def inference(data: Census):
         encoder=encoder, lb=lb, training=False)
     pred = model_package.inference(model, X)
     y = lb.inverse_transform(pred)[0]
+    print('prediction---->',y)
     return {"prediction": y}

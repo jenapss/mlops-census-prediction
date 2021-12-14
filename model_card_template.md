@@ -21,6 +21,7 @@ Presicion, Recall, and F1 score
 
 F1 score - 0.71
 
+METRICS ON TEST DATA --- PRECISION = 0.62058526740666  RECAL = 0.5423280423280423  FBETA = 0.5788235294117646
 
 ## Ethical Considerations
 Contains personal/private informations.

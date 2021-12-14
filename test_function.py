@@ -33,7 +33,26 @@ def test_inference():
     assert response.status_code == 200
     assert response.json() == {"PREDICTION": ">50K"}
 
+def test_inference_low_salary():
+    data_json = {
+    "workclass": "State-gov",
+        "education": "Some-college",
+        "marital-status": "Separated",
+        "occupation": "Adm-clerical",
+        "relationship": "Own-child",
+        "race": "Black",
+        "sex": "Female",
+        "native-country": "United-States",
+        "age": 25,
+        "hours-per-week": 30
 
+}
+
+    response = requests.post(
+        'https://jelal-fastapi.herokuapp.com/predict', json=data_json)
+
+    assert response.status_code == 200
+    assert response.json() == {"PREDICTION": "<=50K"}
 
 def test_post():
     data_json = {

@@ -25,7 +25,15 @@ def train_model():
 
     #train model
     model = ml_model.train_model(X, y)
-    
+
+
+    # Proces the test data with the process_data function.
+    X_test, y_test, _, _ = process_data(
+        test, categorical_features=categories, label='salary', training=False, encoder=encoder, lb=lb)
+    y_test_preds = ml_model.inference(model,X_test )
+    precision, recall, fbeta = ml_model.compute_model_metrics(y_test, y_test_preds)
+
+    print(' METRICS ON TEST DATA --- PRECISION = {}  RECAL = {}  FBETA = {}'.format(precision, recall, fbeta))
     ml_model.save_model(model, 'model')
     ml_model.save_model(encoder, 'encoder')
     ml_model.save_model(lb, 'lb')
